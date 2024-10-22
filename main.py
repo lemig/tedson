@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
 from outlines import models, generate
-from user import User
+from ted_contract_award_notice import TedContractAwardNotice
 
 class Prompt(BaseModel):
     text: str
@@ -9,7 +9,7 @@ class Prompt(BaseModel):
 app = FastAPI()
 
 llm_model = models.transformers("microsoft/Phi-3-mini-4k-instruct")
-generator = generate.json(llm_model, User)
+generator = generate.json(llm_model, TedContractAwardNotice)
 
 @app.post("/AskLLM")
 async def ask_llm(prompt: Prompt):
